@@ -25,14 +25,14 @@ jobs:
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
     - name: Download tarball archive
-      uses: carlosperate/download-file-action@v2
+      uses: uisei-cn/actions-download-file@v1.6.0
       id: download-tarball
       with:
-        file-url: 'https://github.com/philipvdh/LDraw/archive/${{ env.RELEASE_VERSION }}/LDraw-${{ env.RELEASE_VERSION }}.tar.gz'
+        url: 'https://github.com/SHTOOLS/SHTOOLS/archive/${{ env.RELEASE_VERSION }}/ldraw-${{ env.RELEASE_VERSION }}.tar.gz'
 
     - name: Upload tarball as release asset
       uses: alexellis/upload-assets@0.4.0
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        asset_paths: '["${{ steps.download-tarball.outputs.file-path }}"]'
+        asset_paths: '["${{ steps.download-tarball.outputs.filename }}"]'
